@@ -1,0 +1,22 @@
+# Baseline imbalance handling (Phase 1)
+method: class_weight  # Options: none, class_weight, smote, adasyn, smoteenn, smotetomek
+
+# SMOTE parameters
+smote:
+  k_neighbors: 5
+  sampling_strategy: auto  # auto, minority, or float ratio
+
+# ADASYN parameters
+adasyn:
+  n_neighbors: 5
+  sampling_strategy: auto
+
+# Hybrid parameters (SMOTE-ENN, SMOTE-Tomek)
+smoteenn:
+  smote_k: 5
+  enn_n: 3
+  sampling_strategy: auto
+
+smotetomek:
+  smote_k: 5
+  sampling_strategy: auto

@@ -1,0 +1,15 @@
+# Baseline preprocessing configuration (Phase 1)
+missing: median  # Options: delete, mean, median, knn, mice
+outliers: iqr_clip  # Options: none, iqr_clip, zscore_clip
+scale: standard  # Options: standard, minmax, robust, none
+encode: onehot  # Options: onehot, ordinal, target
+
+# Missing value thresholds
+missing_threshold:
+  drop_feature: 0.2  # Drop if >20% missing
+  drop_row: 0.05  # Drop rows if <5% missing
+
+# Outlier detection params
+outlier_params:
+  iqr_factor: 1.5  # IQR multiplier
+  zscore_threshold: 3.0  # Z-score threshold

@@ -1,0 +1,46 @@
+# Main configuration file
+defaults:
+  - _self_
+  - preprocessing: baseline
+  - features: baseline
+  - imbalance: baseline
+  - model: lr
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
+
+# Global settings
+seed: 42
+project_name: cardio_cvd
+data_path: data/raw/cardio_train.csv
+
+# Cross-validation settings
+cv:
+  n_splits: 5
+  shuffle: true
+  stratified: true
+  test_size: 0.2
+  random_state: ${seed}
+
+# Tracking
+tracking:
+  mlflow_uri: ./mlruns
+  experiment_name: ${phase}_${model.name}
+  run_name: ${model.name}_${preprocessing.missing}_${imbalance.method}
+
+# Experiment phase
+phase: baseline  # baseline, intermediate, advanced
+
+# Output paths
+output:
+  experiments_dir: experiments
+  figures_dir: ${output.experiments_dir}/figures
+  reports_dir: ${output.experiments_dir}/reports
+  models_dir: ${output.experiments_dir}/models
+
+# Hydra configuration
+hydra:
+  run:
+    dir: ${output.experiments_dir}/runs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ${output.experiments_dir}/sweeps/${now:%Y-%m-%d}
+    subdir: ${hydra.job.num}

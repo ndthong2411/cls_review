@@ -1,0 +1,19 @@
+# Baseline feature configuration (Phase 1)
+correlation_threshold: 0.95  # Remove features with correlation > this
+selector: none  # Options: none, rfe, l1, tree_importance, mutual_info
+
+# PCA settings
+pca:
+  use: false
+  explained_variance: 0.95
+  whiten: false
+
+# RFE settings (if selector=rfe)
+rfe:
+  n_features_to_select: null  # null = auto select via CV
+  step: 1
+  estimator: rf  # lr, rf, dt
+
+# Feature importance settings
+importance:
+  threshold: 0.01  # Drop features with importance < this

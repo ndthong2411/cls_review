@@ -1,0 +1,28 @@
+# Logistic Regression configuration
+name: lr
+generation: 1  # baseline
+
+# Sklearn parameters
+params:
+  penalty: l2  # l1, l2, elasticnet, none
+  C: 1.0
+  solver: lbfgs  # lbfgs, liblinear, saga
+  max_iter: 1000
+  class_weight: balanced
+  random_state: ${seed}
+
+# Optuna search space
+optuna:
+  n_trials: 20
+  timeout: 3600  # 1 hour
+  params:
+    C:
+      type: loguniform
+      low: 0.001
+      high: 10.0
+    penalty:
+      type: categorical
+      choices: [l1, l2, elasticnet]
+    solver:
+      type: categorical
+      choices: [liblinear, saga]
