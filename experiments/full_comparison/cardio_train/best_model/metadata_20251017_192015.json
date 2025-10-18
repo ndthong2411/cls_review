@@ -1,0 +1,53 @@
+{
+  "timestamp": "20251017_192015",
+  "model_name": "Gen1_DecisionTree",
+  "generation": 1,
+  "configuration": {
+    "scaler": "none",
+    "imbalance": "smote_enn",
+    "feature_selection": "mutual_info_12"
+  },
+  "cv_metrics": {
+    "pr_auc": 0.8022510979337948,
+    "pr_auc_std": 0.004082655305192556,
+    "sensitivity": 0.6900256608928275,
+    "specificity": 0.7662488345248919,
+    "f1": 0.7172224696581562
+  },
+  "test_metrics": {
+    "accuracy": 0.7233571428571428,
+    "balanced_accuracy": 0.7233310525162621,
+    "sensitivity": 0.6776729559748428,
+    "specificity": 0.7689891490576813,
+    "precision": 0.7455574775908161,
+    "npv": 0.7048815600052349,
+    "f1": 0.7099962560838637,
+    "roc_auc": 0.7702124963959172,
+    "pr_auc": 0.7982292873684171,
+    "mcc": 0.4485465959312103
+  },
+  "training_info": {
+    "train_samples": 19623,
+    "test_samples": 14000,
+    "features": 12,
+    "train_time_sec": 0.03854632377624512
+  },
+  "feature_names": [
+    "age_years",
+    "gender",
+    "height",
+    "weight",
+    "bmi",
+    "ap_hi",
+    "ap_lo",
+    "pulse_pressure",
+    "map",
+    "is_hypertension",
+    "cholesterol",
+    "gluc",
+    "smoke",
+    "alco",
+    "active"
+  ],
+  "best_iteration": null
+}

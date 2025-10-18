@@ -1,0 +1,23 @@
+TONG KET KET QUA THUC NGHIEM CHO BAI THUYET TRINH
+================================================================================
+
+Dataset: Cardiovascular Disease (70,000 patients)
+Total experiments: 270
+Models tested: 13
+Configurations: 270
+
+BEST MODEL:
+  Gen1_DecisionTree (Gen 1)
+  PR-AUC: 0.8023 ± 0.0041
+  Config: none + smote_enn + mutual_info_12
+
+GENERATION PERFORMANCE:
+  Gen 1: Mean=0.7576, Max=0.8023
+  Gen 2: Mean=0.7653, Max=0.7865
+  Gen 3: Mean=0.7711, Max=0.7864
+  Gen 4: Mean=0.7660, Max=0.7839
+
+PREPROCESSING INSIGHTS:
+  Best Scaling: none
+  Best Imbalance: smote_enn
+  Best Feature Selection: mutual_info_12

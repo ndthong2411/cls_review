@@ -15,9 +15,12 @@ catboost>=1.2
 # PyTorch CPU by default; replace with CUDA build if available
 torch>=2.2
 torchvision>=0.17
-# Streamlit for demo app
+# Generation 4 Deep Learning models
+pytorch-tabnet>=4.0
+# Streamlit dashboard
 streamlit>=1.30
 plotly>=5.18
+kaleido>=0.2.1  # For plotly static image export
 scipy>=1.11
 # Additional utilities
 tqdm>=4.66

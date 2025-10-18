@@ -11,6 +11,30 @@ All project documentation with creation dates.
   - Expected results
   - Next steps
 
+### 🔧 Performance Optimization (NEW - Oct 16, 2025)
+- **[FIXES_APPLIED.md](FIXES_APPLIED.md)** - All optimizations applied ✅
+  - Preprocessing order fixed
+  - Hyperparameters optimized
+  - Expected 5-8% improvement
+  - Verification & next steps
+
+- **[PERFORMANCE_ISSUES_SUMMARY.md](PERFORMANCE_ISSUES_SUMMARY.md)** - Root cause analysis
+  - Why Gen2/Gen3 underperformed
+  - Data leakage issues
+  - Hyperparameter problems
+  - Complete fix guide
+
+- **[CODE_FIXES_NEEDED.md](CODE_FIXES_NEEDED.md)** - Detailed fix instructions
+  - Step-by-step code changes
+  - Before/after comparisons
+  - Expected improvements
+
+- **[DIAGNOSIS_REPORT.md](DIAGNOSIS_REPORT.md)** - Technical diagnosis
+  - Deep technical analysis
+  - Experiment results
+  - Recommendations
+  - Action items
+
 ### Getting Started
 - **[25_10_15_GETTING_STARTED.md](25_10_15_GETTING_STARTED.md)** - Complete setup walkthrough
   - Installation steps
@@ -142,18 +166,20 @@ streamlit run ../app.py
 | 2025-10-15 | 1.2 | INDEX.md, FULL_COMPARISON_GUIDE.md | Added comprehensive comparison script |
 | 2025-10-15 | 1.3 | quickstart.py, full_comparison.py, EARLY_STOPPING_EXPLAINED.md | Added early stopping & convergence |
 | 2025-10-15 | 1.4 | quickstart.py, full_comparison.py, save_best_model.py, GPU_GUIDE.md | GPU acceleration (RTX 3090) + best model saving |
+| 2025-10-16 | 1.5 | full_comparison.py, FIXES_APPLIED.md | **Critical fixes: preprocessing order, hyperparameters optimized** |
 
 ## Support
 
 For questions or issues:
 1. Check [25_10_15_GETTING_STARTED.md](25_10_15_GETTING_STARTED.md) troubleshooting section
 2. Review [25_10_15_PROJECT_PLAN.md](25_10_15_PROJECT_PLAN.md) for methodology
-3. Check source code comments in `../src/`
+3. Check [FIXES_APPLIED.md](FIXES_APPLIED.md) for latest optimizations
+4. Check source code comments in `../src/`
 
 ---
 
-**Last Updated**: October 15, 2025  
-**Total Documents**: 10 (9 content + 1 index)  
-**Total Pages**: ~230+ pages of documentation  
-**Version**: 1.4 (GPU Acceleration + Best Model Saving)  
+**Last Updated**: October 16, 2025  
+**Total Documents**: 14 (13 content + 1 index)  
+**Total Pages**: ~280+ pages of documentation  
+**Version**: 1.5 (Performance Optimization - Fixed preprocessing order & hyperparameters)  
 **Hardware**: Optimized for NVIDIA RTX 3090
