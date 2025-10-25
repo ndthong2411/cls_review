@@ -1210,7 +1210,7 @@ def main():
     # Smart configuration: Only scale for models that need it
     experiments = []
     for model_name, model_info in models.items():
-        scalers = ['standard', 'robust'] if model_info['needs_scaling'] else ['none']
+        scalers = ['standard', 'minmax', 'robust'] if model_info['needs_scaling'] else ['none']
         
         for scaler, imbalance, feat_sel in product(
             scalers,

@@ -1,0 +1,68 @@
+{
+  "timestamp": "20251019_163520",
+  "model_name": "Gen1_KNN",
+  "generation": 1,
+  "configuration": {
+    "scaler": "standard",
+    "imbalance": "none",
+    "feature_selection": "select_k_best_12"
+  },
+  "cv_metrics": {
+    "pr_auc": 0.8693497899910471,
+    "pr_auc_std": 0.010967167796465163,
+    "sensitivity": 0.7918857513794222,
+    "specificity": 0.9999120689730907,
+    "f1": 0.8595018391570116
+  },
+  "test_metrics": {
+    "accuracy": 0.9995259997893332,
+    "balanced_accuracy": 0.902990881214613,
+    "sensitivity": 0.8061224489795918,
+    "specificity": 0.9998593134496342,
+    "precision": 0.9080459770114943,
+    "npv": 0.9996659340659341,
+    "f1": 0.8540540540540541,
+    "roc_auc": 0.9386689186085239,
+    "pr_auc": 0.8897142343743525,
+    "mcc": 0.8553357503741946
+  },
+  "training_info": {
+    "train_samples": 227845,
+    "test_samples": 56962,
+    "features": 12,
+    "train_time_sec": 0.3345804214477539
+  },
+  "feature_names": [
+    "Time",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "Amount"
+  ],
+  "best_iteration": null
+}
