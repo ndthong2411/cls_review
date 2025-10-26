@@ -1,0 +1,386 @@
+========================================================================================================================
+PHAN TICH ANH HUONG CUA CONFIG LEN PERFORMANCE
+========================================================================================================================
+
+[1] TONG QUAN DATA:
+
+Cardio Dataset: 270 experiments
+Credit Dataset: 270 experiments
+
+Cardio columns: ['model', 'generation', 'scaler', 'imbalance', 'feature_selection', 'accuracy', 'accuracy_std', 'balanced_accuracy', 'balanced_accuracy_std', 'sensitivity', 'sensitivity_std', 'specificity', 'specificity_std', 'precision', 'precision_std', 'npv', 'npv_std', 'f1', 'f1_std', 'roc_auc', 'roc_auc_std', 'pr_auc', 'pr_auc_std', 'mcc', 'mcc_std', 'train_time_sec']
+
+Credit columns: ['model', 'generation', 'scaler', 'imbalance', 'feature_selection', 'accuracy', 'accuracy_std', 'balanced_accuracy', 'balanced_accuracy_std', 'sensitivity', 'sensitivity_std', 'specificity', 'specificity_std', 'precision', 'precision_std', 'npv', 'npv_std', 'f1', 'f1_std', 'roc_auc', 'roc_auc_std', 'pr_auc', 'pr_auc_std', 'mcc', 'mcc_std', 'train_time_sec']
+
+========================================================================================================================
+[2] ANH HUONG CUA SCALING (Phuong phap chuan hoa)
+========================================================================================================================
+
+CARDIO DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+F1-Score by Scaler:
+              mean       std       max       min  count
+scaler                                                 
+none      0.706458  0.025068  0.726014  0.615506    120
+standard  0.696949  0.026437  0.724703  0.604512     75
+robust    0.691147  0.027839  0.725094  0.626814     75
+
+ROC-AUC by Scaler:
+              mean       std       max       min  count
+scaler                                                 
+none      0.782643  0.018876  0.803511  0.719357    120
+robust    0.771329  0.026201  0.801508  0.700023     75
+standard  0.767427  0.025963  0.800508  0.706563     75
+
+=> BEST SCALER: none (F1 = 0.7065)
+
+CREDITCARD DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+F1-Score by Scaler:
+              mean       std       max       min  count
+scaler                                                 
+none      0.528445  0.226474  0.842857  0.080948    120
+standard  0.367531  0.278406  0.860833  0.076168     75
+robust    0.358544  0.275335  0.861488  0.073836     75
+
+ROC-AUC by Scaler:
+              mean       std       max       min  count
+scaler                                                 
+standard  0.948438  0.020267  0.982485  0.913592     75
+robust    0.943120  0.022413  0.982536  0.884956     75
+none      0.932076  0.061827  0.985087  0.611024    120
+
+=> BEST SCALER: none (F1 = 0.5284)
+
+========================================================================================================================
+[3] ANH HUONG CUA FEATURE SELECTION (Chon features quan trong)
+========================================================================================================================
+
+CARDIO DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+F1-Score by Feature Selector:
+                       mean       std       max       min  count
+feature_selection                                               
+mutual_info_12     0.710190  0.017042  0.725552  0.649324     54
+none               0.710127  0.017010  0.725543  0.650287     54
+select_k_best_12   0.709490  0.018873  0.726014  0.646983     54
+select_k_best_5    0.708038  0.012929  0.719304  0.667395     54
+mutual_info_5      0.659972  0.024163  0.689423  0.604512     54
+
+ROC-AUC by Feature Selector:
+                       mean       std       max       min  count
+feature_selection                                               
+select_k_best_12   0.787047  0.017981  0.803139  0.731998     54
+mutual_info_12     0.786863  0.018250  0.802971  0.728855     54
+none               0.786785  0.018273  0.803511  0.728745     54
+select_k_best_5    0.769572  0.019522  0.781722  0.709649     54
+mutual_info_5      0.746100  0.015717  0.757298  0.700023     54
+
+=> BEST FEATURE SELECTOR: mutual_info_12 (F1 = 0.7102)
+
+CREDITCARD DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+F1-Score by Feature Selector:
+                       mean       std       max       min  count
+feature_selection                                               
+none               0.572802  0.274078  0.842857  0.106539     54
+mutual_info_12     0.495168  0.252909  0.861488  0.096344     54
+select_k_best_12   0.485038  0.248370  0.859502  0.093628     54
+select_k_best_5    0.316636  0.234194  0.850046  0.076168     54
+mutual_info_5      0.313115  0.230433  0.845417  0.073836     54
+
+ROC-AUC by Feature Selector:
+                       mean       std       max       min  count
+feature_selection                                               
+mutual_info_12     0.952266  0.035837  0.982885  0.753013     54
+none               0.949520  0.036442  0.985087  0.790845     54
+select_k_best_12   0.946832  0.050386  0.983390  0.648704     54
+select_k_best_5    0.925910  0.048951  0.966791  0.611024     54
+mutual_info_5      0.923917  0.042522  0.964547  0.666688     54
+
+=> BEST FEATURE SELECTOR: none (F1 = 0.5728)
+
+========================================================================================================================
+[4] ANH HUONG CUA IMBALANCE HANDLING
+========================================================================================================================
+
+CARDIO DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+F1-Score by Imbalance Handler:
+               mean       std       max       min  count
+imbalance                                               
+smote      0.699741  0.025795  0.726014  0.604512     90
+none       0.699570  0.025306  0.725509  0.628155     90
+smote_enn  0.699379  0.029823  0.725049  0.615506     90
+
+ROC-AUC by Imbalance Handler:
+               mean       std       max       min  count
+imbalance                                               
+smote      0.776015  0.025313  0.803511  0.700023     90
+none       0.776014  0.024829  0.803196  0.707513     90
+smote_enn  0.773792  0.022030  0.799759  0.712527     90
+
+Precision/Recall by Imbalance Handler:
+           precision  sensitivity      f1
+imbalance                                
+smote         0.7511       0.6585  0.6997
+none          0.7512       0.6583  0.6996
+smote_enn     0.7585       0.6545  0.6994
+
+=> BEST IMBALANCE HANDLER: smote (F1 = 0.6997)
+
+CREDITCARD DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+F1-Score by Imbalance Handler:
+               mean       std       max       min  count
+imbalance                                               
+none       0.506347  0.294100  0.861488  0.073836     90
+smote      0.413718  0.250114  0.825806  0.087824     90
+smote_enn  0.389590  0.244644  0.831169  0.076168     90
+
+ROC-AUC by Imbalance Handler:
+               mean       std       max       min  count
+imbalance                                               
+smote_enn  0.945209  0.024155  0.985087  0.882157     90
+smote      0.945105  0.024240  0.984948  0.884956     90
+none       0.928753  0.068340  0.984839  0.611024     90
+
+Precision/Recall by Imbalance Handler:
+           precision  sensitivity      f1
+imbalance                                
+none          0.4880       0.7841  0.5063
+smote         0.3318       0.8302  0.4137
+smote_enn     0.3033       0.8383  0.3896
+
+=> BEST IMBALANCE HANDLER: none (F1 = 0.5063)
+
+========================================================================================================================
+[5] PERFORMANCE BY MODEL TYPE
+========================================================================================================================
+
+CARDIO DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+Top 10 Models by F1-Score:
+                             mean       max  count
+model                                             
+Gen2_MLP_Sklearn         0.710911  0.725094     30
+Gen2_GradientBoosting    0.710684  0.725955     15
+Gen3_CatBoost            0.710515  0.725346     15
+Gen2_RandomForest        0.710204  0.725196     15
+Gen3_LightGBM            0.709568  0.726014     15
+Gen4_TabNet              0.708508  0.722614     15
+Gen3_XGBoost             0.708316  0.723951     15
+Gen1_DecisionTree        0.705137  0.717759     15
+Gen4_PyTorch_MLP         0.704382  0.724629     30
+Gen1_LogisticRegression  0.692586  0.708617     30
+
+CREDITCARD DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+Top 10 Models by F1-Score:
+                           mean       max  count
+model                                           
+Gen3_XGBoost           0.671567  0.842857     15
+Gen2_MLP_Sklearn       0.653799  0.828500     30
+Gen2_RandomForest      0.627629  0.822381     15
+Gen2_ExtraTrees        0.602819  0.772139     15
+Gen3_LightGBM          0.591592  0.831169     15
+Gen3_CatBoost          0.570294  0.828947     15
+Gen1_KNN               0.559168  0.861488     30
+Gen4_TabNet            0.493029  0.782051     15
+Gen2_GradientBoosting  0.483506  0.755123     15
+Gen4_PyTorch_MLP       0.301887  0.778523     30
+
+========================================================================================================================
+[6] TOP 10 BEST CONFIGURATIONS (Theo F1-Score)
+========================================================================================================================
+
+CARDIO DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+Rank #1:
+  Model: Gen3_LightGBM
+  Config: scaler=none, fs=select_k_best_12, imb=smote
+  F1=0.7260, ROC-AUC=0.8018, Acc=0.7366, Time=25.90s
+
+Rank #2:
+  Model: Gen2_GradientBoosting
+  Config: scaler=none, fs=select_k_best_12, imb=smote
+  F1=0.7260, ROC-AUC=0.8029, Acc=0.7372, Time=16.30s
+
+Rank #3:
+  Model: Gen2_GradientBoosting
+  Config: scaler=none, fs=mutual_info_12, imb=smote
+  F1=0.7256, ROC-AUC=0.8025, Acc=0.7369, Time=24.86s
+
+Rank #4:
+  Model: Gen3_LightGBM
+  Config: scaler=none, fs=none, imb=smote
+  F1=0.7255, ROC-AUC=0.8020, Acc=0.7364, Time=26.02s
+
+Rank #5:
+  Model: Gen3_LightGBM
+  Config: scaler=none, fs=none, imb=none
+  F1=0.7255, ROC-AUC=0.8019, Acc=0.7361, Time=23.17s
+
+Rank #6:
+  Model: Gen2_GradientBoosting
+  Config: scaler=none, fs=none, imb=smote
+  F1=0.7254, ROC-AUC=0.8026, Acc=0.7367, Time=18.32s
+
+Rank #7:
+  Model: Gen3_LightGBM
+  Config: scaler=none, fs=mutual_info_12, imb=none
+  F1=0.7254, ROC-AUC=0.8012, Acc=0.7361, Time=31.84s
+
+Rank #8:
+  Model: Gen3_CatBoost
+  Config: scaler=none, fs=mutual_info_12, imb=none
+  F1=0.7253, ROC-AUC=0.8030, Acc=0.7373, Time=513.54s
+
+Rank #9:
+  Model: Gen2_RandomForest
+  Config: scaler=none, fs=select_k_best_12, imb=smote
+  F1=0.7252, ROC-AUC=0.8016, Acc=0.7364, Time=5.95s
+
+Rank #10:
+  Model: Gen2_MLP_Sklearn
+  Config: scaler=robust, fs=none, imb=smote
+  F1=0.7251, ROC-AUC=0.8007, Acc=0.7339, Time=37.63s
+
+CREDITCARD DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+Rank #1:
+  Model: Gen1_KNN
+  Config: scaler=robust, fs=mutual_info_12, imb=none
+  F1=0.8615, ROC-AUC=0.9225, Acc=0.9996, Time=111.84s
+
+Rank #2:
+  Model: Gen1_KNN
+  Config: scaler=standard, fs=mutual_info_12, imb=none
+  F1=0.8608, ROC-AUC=0.9212, Acc=0.9996, Time=114.23s
+
+Rank #3:
+  Model: Gen1_KNN
+  Config: scaler=standard, fs=select_k_best_12, imb=none
+  F1=0.8595, ROC-AUC=0.9212, Acc=0.9996, Time=40.63s
+
+Rank #4:
+  Model: Gen1_KNN
+  Config: scaler=robust, fs=select_k_best_12, imb=none
+  F1=0.8593, ROC-AUC=0.9212, Acc=0.9996, Time=33.01s
+
+Rank #5:
+  Model: Gen1_KNN
+  Config: scaler=standard, fs=select_k_best_5, imb=none
+  F1=0.8500, ROC-AUC=0.9136, Acc=0.9995, Time=6.17s
+
+Rank #6:
+  Model: Gen1_KNN
+  Config: scaler=robust, fs=select_k_best_5, imb=none
+  F1=0.8496, ROC-AUC=0.9136, Acc=0.9995, Time=6.46s
+
+Rank #7:
+  Model: Gen1_KNN
+  Config: scaler=robust, fs=mutual_info_5, imb=none
+  F1=0.8454, ROC-AUC=0.9148, Acc=0.9995, Time=80.32s
+
+Rank #8:
+  Model: Gen3_XGBoost
+  Config: scaler=none, fs=none, imb=none
+  F1=0.8429, ROC-AUC=0.9747, Acc=0.9995, Time=1.46s
+
+Rank #9:
+  Model: Gen1_KNN
+  Config: scaler=standard, fs=mutual_info_5, imb=none
+  F1=0.8418, ROC-AUC=0.9161, Acc=0.9995, Time=79.07s
+
+Rank #10:
+  Model: Gen1_KNN
+  Config: scaler=standard, fs=none, imb=none
+  F1=0.8403, ROC-AUC=0.9199, Acc=0.9995, Time=31.30s
+
+========================================================================================================================
+[7] PHAN TICH TUONG TAC GIUA CAC CONFIG
+========================================================================================================================
+
+CARDIO DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+F1-Score by (Scaler + Feature Selector):
+feature_selection  mutual_info_12  ...  select_k_best_5
+scaler                             ...                 
+none                       0.7187  ...           0.7118
+robust                     0.6987  ...           0.7045
+standard                   0.7080  ...           0.7055
+
+[3 rows x 5 columns]
+
+=> BEST (Scaler + FS): none + mutual_info_12 (F1 = 0.7187)
+
+Imbalance Handler by Generation:
+imbalance     none   smote  smote_enn
+generation                           
+1           0.6869  0.6849     0.6987
+2           0.6998  0.7001     0.6982
+3           0.7152  0.7151     0.6981
+4           0.7045  0.7083     0.7045
+
+CREDITCARD DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+F1-Score by (Scaler + Feature Selector):
+feature_selection  mutual_info_12  ...  select_k_best_5
+scaler                             ...                 
+none                       0.6030  ...           0.3885
+robust                     0.4052  ...           0.2574
+standard                   0.4126  ...           0.2609
+
+[3 rows x 5 columns]
+
+=> BEST (Scaler + FS): none + none (F1 = 0.6945)
+
+Imbalance Handler by Generation:
+imbalance     none   smote  smote_enn
+generation                           
+1           0.4372  0.2497     0.2276
+2           0.6151  0.4310     0.4126
+3           0.6096  0.6366     0.5872
+4           0.2646  0.4239     0.4083
+
+========================================================================================================================
+[8] THONG KE VA INSIGHTS
+========================================================================================================================
+
+CARDIO DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+Variance by config type:
+  Scaler variance: 0.0077
+  Feature Selector variance: 0.0221
+  Imbalance Handler variance: 0.0002
+  Model variance: 0.0115
+
+=> Config co anh huong LON NHAT: Feature_Selector (std = 0.0221)
+
+CREDITCARD DATASET:
+------------------------------------------------------------------------------------------------------------------------
+
+Variance by config type:
+  Scaler variance: 0.0956
+  Feature Selector variance: 0.1162
+  Imbalance Handler variance: 0.0616
+  Model variance: 0.1971
+
+=> Config co anh huong LON NHAT: Model (std = 0.1971)
+
+========================================================================================================================
+HOAN THANH PHAN TICH!
+========================================================================================================================

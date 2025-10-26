@@ -308,6 +308,13 @@ def main():
     st.markdown('<h1 class="main-header">🎯 ML Classification: Performance Insights</h1>',
                 unsafe_allow_html=True)
 
+    # Info banner
+    st.info("""
+    👋 **Chào mừng đến với Dashboard Phân Tích Models!**
+
+    📄 **Trang mới:** Xem [Experimental Setup](./Experimental_Setup) để hiểu về datasets, models và configs được sử dụng.
+    """)
+
     # Sidebar - Dataset selection first
     st.sidebar.title("⚙️ Configuration")
 
@@ -351,17 +358,33 @@ def main():
     
     # Show metric description
     metric_descriptions = {
-        'f1': "**F1 Score**: Harmonic mean of precision and recall. Best for balanced evaluation.",
-        'accuracy': "**Accuracy**: Proportion of correct predictions (both positive and negative). Simple but can be misleading for imbalanced datasets.",
-        'balanced_accuracy': "**Balanced Accuracy**: Average of sensitivity and specificity. Better than accuracy for imbalanced datasets.",
-        'pr_auc': "**PR-AUC**: Area under Precision-Recall curve. Best for imbalanced datasets.",
-        'roc_auc': "**ROC-AUC**: Area under ROC curve. Good for overall discrimination ability.",
-        'sensitivity': "**Sensitivity (Recall)**: Proportion of actual positives correctly identified.",
-        'specificity': "**Specificity**: Proportion of actual negatives correctly identified.",
-        'mcc': "**MCC**: Correlation between predictions and actual values. Range: -1 to +1."
+        'f1': """
+**F1 Score** - Điểm cân bằng giữa Precision (độ chính xác khi dự đoán positive) và Recall (tìm được bao nhiêu % positive thực sự). Dùng khi muốn cân bằng giữa "không bỏ sót" và "không chẩn đoán nhầm". Phù hợp với dataset cân bằng. F1 > 0.7 là tốt, > 0.9 là xuất sắc.
+""",
+        'accuracy': """
+**Accuracy** - Tỷ lệ dự đoán đúng trên tổng số mẫu. Đơn giản nhất nhưng DỄ BỊ LỪA với data mất cân bằng! Ví dụ: Model dự đoán tất cả "không fraud" vẫn đạt 99% accuracy nếu chỉ có 1% fraud, nhưng bỏ sót 100% fraud. Chỉ dùng cho dataset cân bằng (50/50).
+""",
+        'balanced_accuracy': """
+**Balanced Accuracy** - Trung bình của tỷ lệ dự đoán đúng cho mỗi class. Tốt hơn Accuracy cho data mất cân bằng vì CÔNG BẰNG với cả 2 class. Model "lười" dự đoán tất cả 1 class sẽ chỉ được 50%, không phải 99% như Accuracy. Luôn ưu tiên hơn Accuracy khi data imbalanced.
+""",
+        'pr_auc': """
+**PR-AUC** - Diện tích dưới đường cong Precision-Recall. Metric TRUNG THỰC nhất cho data MẤT CÂN BẰNG MẠNH (fraud 0.1%, bệnh hiếm...). ROC-AUC có thể = 0.99 nhưng PR-AUC = 0.3 sẽ CHỈ RA model thực sự tệ. PR-AUC > 0.5 tốt hơn random, > 0.7 là tốt. Với imbalanced data, PR-AUC QUAN TRỌNG HƠN ROC-AUC!
+""",
+        'roc_auc': """
+**ROC-AUC** - Đo khả năng phân biệt giữa 2 class. 0.5 = random (như tung đồng xu), 0.7-0.8 = tốt, > 0.9 = xuất sắc. Phù hợp với dataset cân bằng. CẨN THẬN: ROC-AUC cao KHÔNG đảm bảo model tốt với imbalanced data (dễ bị lừa). Với data imbalanced, hãy xem PR-AUC thay vì ROC-AUC.
+""",
+        'sensitivity': """
+**Sensitivity (Recall)** - Tỷ lệ tìm được positive thực sự (bao nhiêu % bệnh nhân được phát hiện). Quan trọng trong y tế/an ninh vì BỎ SÓT = NGUY HIỂM. Ví dụ: 100 người có COVID, test tìm ra 95 → Sensitivity = 95%. Y tế/an ninh cần > 95%. Trade-off: Sensitivity cao → ít bỏ sót nhưng nhiều false alarm.
+""",
+        'specificity': """
+**Specificity** - Tỷ lệ nhận đúng negative (bao nhiêu % người khỏe được xác nhận đúng). Quan trọng khi không muốn chẩn đoán nhầm. Ví dụ: Email spam filter với Specificity cao → ít chặn nhầm email quan trọng. Trade-off: Specificity cao → ít false alarm nhưng có thể bỏ sót positive. Cần cân bằng với Sensitivity tùy bài toán.
+""",
+        'mcc': """
+**MCC** - Metric DUY NHẤT tính đúng cho data IMBALANCED, xét cả 4 trường hợp (TP/TN/FP/FN). Giá trị: +1 = hoàn hảo, 0 = random, -1 = tệ hơn random. Model "lười" dự đoán tất cả 1 class: Accuracy 99% nhưng MCC = 0 (vô dụng!). MCC < 0.3 = tệ, 0.5-0.7 = tốt, > 0.7 = rất tốt. Được khoa học tin cậy cho research.
+"""
     }
-    
-    with st.sidebar.expander("ℹ️ About This Metric", expanded=False):
+
+    with st.sidebar.expander("ℹ️ Giải Thích Chỉ Số", expanded=False):
         st.markdown(metric_descriptions.get(primary_metric, ""))
     
     st.sidebar.markdown("---")
