@@ -359,32 +359,32 @@ def main():
     # Show metric description
     metric_descriptions = {
         'f1': """
-**F1 Score** - Điểm cân bằng giữa Precision (độ chính xác khi dự đoán positive) và Recall (tìm được bao nhiêu % positive thực sự). Dùng khi muốn cân bằng giữa "không bỏ sót" và "không chẩn đoán nhầm". Phù hợp với dataset cân bằng. F1 > 0.7 là tốt, > 0.9 là xuất sắc.
+**F1 Score** - Harmonic mean of Precision (accuracy when predicting positive) and Recall (% of actual positives found). Use when you want to balance "not missing cases" vs "not false alarming". Works best with balanced datasets. F1 > 0.7 is good, > 0.9 is excellent.
 """,
         'accuracy': """
-**Accuracy** - Tỷ lệ dự đoán đúng trên tổng số mẫu. Đơn giản nhất nhưng DỄ BỊ LỪA với data mất cân bằng! Ví dụ: Model dự đoán tất cả "không fraud" vẫn đạt 99% accuracy nếu chỉ có 1% fraud, nhưng bỏ sót 100% fraud. Chỉ dùng cho dataset cân bằng (50/50).
+**Accuracy** - Proportion of correct predictions overall. Simplest metric but MISLEADING with imbalanced data! Example: Predicting "no fraud" for all cases gives 99% accuracy when fraud is 1%, but misses 100% of fraud. Only use for balanced datasets (50/50).
 """,
         'balanced_accuracy': """
-**Balanced Accuracy** - Trung bình của tỷ lệ dự đoán đúng cho mỗi class. Tốt hơn Accuracy cho data mất cân bằng vì CÔNG BẰNG với cả 2 class. Model "lười" dự đoán tất cả 1 class sẽ chỉ được 50%, không phải 99% như Accuracy. Luôn ưu tiên hơn Accuracy khi data imbalanced.
+**Balanced Accuracy** - Average of per-class accuracy. Better than Accuracy for imbalanced data because it's FAIR to both classes. A lazy model predicting all one class gets 50%, not 99% like Accuracy. Always prefer this over Accuracy when data is imbalanced.
 """,
         'pr_auc': """
-**PR-AUC** - Diện tích dưới đường cong Precision-Recall. Metric TRUNG THỰC nhất cho data MẤT CÂN BẰNG MẠNH (fraud 0.1%, bệnh hiếm...). ROC-AUC có thể = 0.99 nhưng PR-AUC = 0.3 sẽ CHỈ RA model thực sự tệ. PR-AUC > 0.5 tốt hơn random, > 0.7 là tốt. Với imbalanced data, PR-AUC QUAN TRỌNG HƠN ROC-AUC!
+**PR-AUC** - Area under Precision-Recall curve. Most HONEST metric for SEVERELY IMBALANCED data (0.1% fraud, rare disease...). ROC-AUC can be 0.99 while PR-AUC = 0.3 REVEALS the model is actually bad. PR-AUC > 0.5 beats random, > 0.7 is good. For imbalanced data, PR-AUC is MORE IMPORTANT than ROC-AUC!
 """,
         'roc_auc': """
-**ROC-AUC** - Đo khả năng phân biệt giữa 2 class. 0.5 = random (như tung đồng xu), 0.7-0.8 = tốt, > 0.9 = xuất sắc. Phù hợp với dataset cân bằng. CẨN THẬN: ROC-AUC cao KHÔNG đảm bảo model tốt với imbalanced data (dễ bị lừa). Với data imbalanced, hãy xem PR-AUC thay vì ROC-AUC.
+**ROC-AUC** - Measures ability to distinguish between 2 classes. 0.5 = random (coin flip), 0.7-0.8 = good, > 0.9 = excellent. Works well with balanced datasets. CAUTION: High ROC-AUC doesn't guarantee good model on imbalanced data (can be deceiving). Use PR-AUC instead for imbalanced cases.
 """,
         'sensitivity': """
-**Sensitivity (Recall)** - Tỷ lệ tìm được positive thực sự (bao nhiêu % bệnh nhân được phát hiện). Quan trọng trong y tế/an ninh vì BỎ SÓT = NGUY HIỂM. Ví dụ: 100 người có COVID, test tìm ra 95 → Sensitivity = 95%. Y tế/an ninh cần > 95%. Trade-off: Sensitivity cao → ít bỏ sót nhưng nhiều false alarm.
+**Sensitivity (Recall)** - Proportion of actual positives correctly found (% of patients detected). Critical in medical/security where MISSING CASES = DANGEROUS. Example: 100 COVID cases, test finds 95 → Sensitivity = 95%. Medical/security needs > 95%. Trade-off: High Sensitivity → fewer misses but more false alarms.
 """,
         'specificity': """
-**Specificity** - Tỷ lệ nhận đúng negative (bao nhiêu % người khỏe được xác nhận đúng). Quan trọng khi không muốn chẩn đoán nhầm. Ví dụ: Email spam filter với Specificity cao → ít chặn nhầm email quan trọng. Trade-off: Specificity cao → ít false alarm nhưng có thể bỏ sót positive. Cần cân bằng với Sensitivity tùy bài toán.
+**Specificity** - Proportion of actual negatives correctly identified (% of healthy correctly confirmed). Important when you don't want false positives. Example: Email spam filter with high Specificity → fewer important emails blocked. Trade-off: High Specificity → fewer false alarms but may miss positives. Balance with Sensitivity based on problem.
 """,
         'mcc': """
-**MCC** - Metric DUY NHẤT tính đúng cho data IMBALANCED, xét cả 4 trường hợp (TP/TN/FP/FN). Giá trị: +1 = hoàn hảo, 0 = random, -1 = tệ hơn random. Model "lười" dự đoán tất cả 1 class: Accuracy 99% nhưng MCC = 0 (vô dụng!). MCC < 0.3 = tệ, 0.5-0.7 = tốt, > 0.7 = rất tốt. Được khoa học tin cậy cho research.
+**MCC** - ONLY metric that's accurate for IMBALANCED data, considers all 4 outcomes (TP/TN/FP/FN). Values: +1 = perfect, 0 = random, -1 = worse than random. Lazy model predicting all one class: Accuracy 99% but MCC = 0 (useless!). MCC < 0.3 = poor, 0.5-0.7 = good, > 0.7 = very good. Trusted in research.
 """
     }
 
-    with st.sidebar.expander("ℹ️ Giải Thích Chỉ Số", expanded=False):
+    with st.sidebar.expander("ℹ️ About This Metric", expanded=False):
         st.markdown(metric_descriptions.get(primary_metric, ""))
     
     st.sidebar.markdown("---")
